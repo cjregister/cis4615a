@@ -1,13 +1,14 @@
-// ERR00-J — Noncompliant: swallows checked exception
+// ERR00-J — Compliant: propagate, then handle
 import java.io.*;
 
 public class R07_ERR00_J {
-  static void readBad() {
+  static void readGood() throws IOException {
     try (InputStream in = new FileInputStream("nope.txt")) {
       in.read();
-    } catch (IOException e) {
-      // swallowed
     }
   }
-  public static void main(String[] args) { readBad(); System.out.println("done"); }
+  public static void main(String[] args) {
+    try { readGood(); }
+    catch (IOException e) { System.err.println("IO failed, " + e.getMessage()); }
+  }
 }
