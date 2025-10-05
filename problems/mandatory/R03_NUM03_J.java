@@ -1,7 +1,7 @@
-// NUM03-J: unsigned must fit, choose proper type
+// NUM03-J: unsigned must fit, use long or exact ops
 public class R03_NUM03_J {
   public static void main(String[] a) {
-    int u32 = 0xF0000000;                 // noncompliant, negative in int
-    System.out.println("u32 as int: " + u32);
+    long u32 = Integer.toUnsignedLong(0xF0000000); // compliant, full range
+    System.out.println("u32 as long: " + u32);
   }
 }
